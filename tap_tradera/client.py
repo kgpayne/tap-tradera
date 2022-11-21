@@ -1,24 +1,35 @@
 """Custom client handling, including traderaStream base class."""
 
-import requests
-from pathlib import Path
-from typing import Any, Dict, Optional, Union, List, Iterable
-
-from singer_sdk.streams import Stream
+import zeep
 
 
-class traderaStream(Stream):
-    """Stream class for tradera streams."""
+class TraderaClient:
+    def __init__(self, app_id, app_key):
+        self.app_id = app_id
+        self.app_key = app_key
 
-    def get_records(self, context: Optional[dict]) -> Iterable[dict]:
-        """Return a generator of record-type dictionary objects.
+        wsdl = "https://api.tradera.com/v3/SearchService.asmx?WSDL"
+        self.client = zeep.Client(wsdl=wsdl)
 
-        The optional `context` argument is used to identify a specific slice of the
-        stream if partitioning is required for the stream. Most implementations do not
-        require partitioning and should ignore the `context` argument.
-        """
-        # TODO: Write logic to extract data from the upstream source.
-        # records = mysource.getall()
-        # for record in records:
-        #     yield record.to_dict()
-        raise NotImplementedError("The method is not yet implemented (TODO)")
+    def search(self, query, category_id=0, order_by="EndDateAscending"):
+        """Simple keyword search."""
+        total_pages = 1
+        current_page = 1
+        search_items = []
+        while current_page <= total_pages:
+            search_result = self.client.service.Search(
+                query=query,
+                categoryId=category_id,
+                pageNumber=current_page,
+                orderBy=order_by,
+                _soapheaders={
+                    "AuthenticationHeader": {
+                        "AppId": self.app_id,
+                        "AppKey": self.app_key,
+                    }
+                },
+            )
+            search_items.extend(search_result.Items)
+            total_pages = search_result.TotalNumberOfPages
+            current_page += 1
+        return search_items

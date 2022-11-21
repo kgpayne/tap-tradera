@@ -2,58 +2,90 @@
 
 from typing import List
 
-from singer_sdk import Tap, Stream
+from singer_sdk import Stream, Tap
 from singer_sdk import typing as th  # JSON schema typing helpers
-# TODO: Import your custom stream types here:
-from tap_tradera.streams import (
-    traderaStream,
-    UsersStream,
-    GroupsStream,
-)
-# TODO: Compile a list of custom stream types here
-#       OR rewrite discover_streams() below with your custom logic.
-STREAM_TYPES = [
-    UsersStream,
-    GroupsStream,
-]
+
+from tap_tradera.streams import TraderaClient, TraderaSearchStream
 
 
-class Taptradera(Tap):
+class TapTradera(Tap):
     """tradera tap class."""
-    name = "tap-tradera"
 
-    # TODO: Update this section with the actual config values you expect:
+    name = "tap-tradera"
     config_jsonschema = th.PropertiesList(
         th.Property(
-            "auth_token",
+            "app_id",
             th.StringType,
             required=True,
             secret=True,  # Flag config as protected.
-            description="The token to authenticate against the API service"
+            description="The Tradera.com developer app ID",
         ),
         th.Property(
-            "project_ids",
-            th.ArrayType(th.StringType),
-            required=True,
-            description="Project IDs to replicate"
-        ),
-        th.Property(
-            "start_date",
-            th.DateTimeType,
-            description="The earliest record date to sync"
-        ),
-        th.Property(
-            "api_url",
+            "app_key",
             th.StringType,
-            default="https://api.mysample.com",
-            description="The url for the API service"
+            required=True,
+            secret=True,  # Flag config as protected.
+            description="The Tradera.com developer app key",
+        ),
+        th.Property(
+            "searches",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property(
+                        "name", th.StringType, required=True, description="Stream name"
+                    ),
+                    th.Property(
+                        "query",
+                        th.StringType,
+                        required=True,
+                        description="Search query",
+                    ),
+                    th.Property(
+                        "category_id",
+                        th.IntegerType,
+                        required=False,
+                        default=0,
+                        description="Category to search. Default 0 (all categories)",
+                    ),
+                    th.Property(
+                        "order_by",
+                        th.StringType,
+                        allowed_values=[
+                            "Relevance",
+                            "BidsAscending",
+                            "BidsDescending",
+                            "PriceAscending",
+                            "PriceDescending",
+                            "EndDateAscending",
+                            "EndDateDescending",
+                        ],
+                        required=False,
+                        default="EndDateAscending",
+                    ),
+                ),
+            ),
+            required=False,
+            description="Simple Search",
         ),
     ).to_dict()
 
     def discover_streams(self) -> List[Stream]:
         """Return a list of discovered streams."""
-        return [stream_class(tap=self) for stream_class in STREAM_TYPES]
+        client = TraderaClient(
+            app_id=self.config["app_id"], app_key=self.config["app_key"]
+        )
+        return [
+            TraderaSearchStream(
+                tap=self,
+                client=client,
+                name=search["name"],
+                query=search["query"],
+                category_id=search["category_id"],
+                order_by=search["order_by"],
+            )
+            for search in self.config.get("searches", [])
+        ]
 
 
 if __name__ == "__main__":
-    Taptradera.cli()
+    TapTradera.cli()

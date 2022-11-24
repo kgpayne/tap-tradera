@@ -5,7 +5,11 @@ from typing import List
 from singer_sdk import Stream, Tap
 from singer_sdk import typing as th  # JSON schema typing helpers
 
-from tap_tradera.streams import TraderaClient, TraderaSearchStream
+from tap_tradera.streams import (
+    TraderaCategoriesStream,
+    TraderaClient,
+    TraderaSearchStream,
+)
 
 
 class TapTradera(Tap):
@@ -74,7 +78,7 @@ class TapTradera(Tap):
         client = TraderaClient(
             app_id=self.config["app_id"], app_key=self.config["app_key"]
         )
-        streams = []
+        streams = [TraderaCategoriesStream(tap=self, client=client)]
         if self.config.get("searches", []):
             streams.append(
                 TraderaSearchStream(

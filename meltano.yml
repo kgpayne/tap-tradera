@@ -1,29 +1,36 @@
 version: 1
 send_anonymous_usage_stats: true
-project_id: "tap-tradera"
+project_id: tap-tradera
 default_environment: test
 environments:
 - name: test
+  config:
+    plugins:
+      extractors:
+      - name: tap-tradera
+        config:
+          searches:
+          - name: test-search
+            query: test
 plugins:
   extractors:
-  - name: "tap-tradera"
-    namespace: "tap_tradera"
+  - name: tap-tradera
+    namespace: tap_tradera
     pip_url: -e .
+    executable: tap-tradera
     capabilities:
-    - state
     - catalog
     - discover
+    - properties
+    - state
     - about
-    - stream-maps
-    config:
-      start_date: '2010-01-01T00:00:00Z'
     settings:
-    # TODO: To configure using Meltano, declare settings and their types here:
-    - name: username
-    - name: password
+    - name: app_id
       kind: password
-    - name: start_date
-      value: '2010-01-01T00:00:00Z'
+    - name: app_key
+      kind: password
+    - name: searches
+      kind: array
   loaders:
   - name: target-jsonl
     variant: andyh1203

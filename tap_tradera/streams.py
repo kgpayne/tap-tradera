@@ -48,3 +48,30 @@ class TraderaSearchStream(Stream):
             ):
                 search_item["search_id"] = search["name"]
                 yield search_item
+
+
+class TraderaCategoriesStream(Stream):
+    """Stream class for tradera streams."""
+
+    name = "categories"
+    schema_filepath = SCHEMAS_DIR / "category.json"
+
+    def __init__(
+        self,
+        tap: TapBaseClass,
+        client: TraderaClient,
+        schema: str | PathLike | dict[str, Any] | singer.Schema | None = None,
+        name: str | None = None,
+    ):
+        super().__init__(tap=tap, schema=schema, name=name)
+        self.client = client
+
+    def get_records(self, context: Optional[dict]) -> Iterable[dict]:
+        """Return a generator of record-type dictionary objects.
+
+        The optional `context` argument is used to identify a specific slice of the
+        stream if partitioning is required for the stream. Most implementations do not
+        require partitioning and should ignore the `context` argument.
+        """
+        for category in self.client.get_categories():
+            yield category

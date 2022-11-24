@@ -29,7 +29,12 @@ class TraderaClient:
                     }
                 },
             )
-            search_items.extend(search_result.Items)
+            search_items.extend(
+                [
+                    zeep.helpers.serialize_object(search_item, dict)
+                    for search_item in search_result.Items
+                ]
+            )
             total_pages = search_result.TotalNumberOfPages
             current_page += 1
         return search_items

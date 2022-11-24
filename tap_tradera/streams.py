@@ -7,7 +7,6 @@ from pathlib import Path
 from typing import Any, Iterable, List, Optional
 
 import singer_sdk._singerlib as singer
-import zeep
 from singer_sdk.plugin_base import PluginBase as TapBaseClass
 from singer_sdk.streams import Stream
 
@@ -42,11 +41,10 @@ class TraderaSearchStream(Stream):
         require partitioning and should ignore the `context` argument.
         """
         for search in self.searches:
-            for raw_search_item in self.client.search(
+            for search_item in self.client.search(
                 query=search["query"],
                 category_id=search.get("category_id", 0),
                 order_by=search.get("order_by", "EndDateAscending"),
             ):
-                search_item = zeep.helpers.serialize_object(raw_search_item, dict)
                 search_item["search_id"] = search["name"]
                 yield search_item

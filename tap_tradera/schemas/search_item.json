@@ -2,18 +2,82 @@
   "$schema": "http://json-schema.org/schema#",
   "type": "object",
   "properties": {
-    "AcceptedBuyerId": {
+    "search_id": {
+      "type": "string"
+    },
+    "Id": {
       "type": "integer"
     },
-    "AcceptsPickup": {
+    "ShortDescription": {
+      "type": "string"
+    },
+    "BuyItNowPrice": {
+      "type": ["integer", "null"]
+    },
+    "SellerId": {
+      "type": "integer"
+    },
+    "SellerAlias": {
+      "type": "string"
+    },
+    "MaxBid": {
+      "type": "integer"
+    },
+    "ThumbnailLink": {
+      "type": "string"
+    },
+    "SellerDsrAverage": {
+      "type": "number"
+    },
+    "EndDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "NextBid": {
+      "type": "integer"
+    },
+    "HasBids": {
       "type": "boolean"
+    },
+    "IsEnded": {
+      "type": "boolean"
+    },
+    "ItemType": {
+      "type": "string"
+    },
+    "ItemUrl": {
+      "type": "string"
+    },
+    "CategoryId": {
+      "type": "integer"
+    },
+    "BidCount": {
+      "type": "integer"
+    },
+    "ImageLinks": {
+      "type": "object",
+      "properties": {
+        "ImageLink": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Url": {
+                "type": "string"
+              },
+              "Format": {
+                "type": "string"
+              }
+            },
+            "required": ["Format", "Url"]
+          }
+        }
+      },
+      "required": ["ImageLink"]
     },
     "AttributeValues": {
       "type": "object",
       "properties": {
-        "NumberAttributeValues": {
-          "type": ["integer", "null"]
-        },
         "TermAttributeValues": {
           "anyOf": [
             {
@@ -53,282 +117,33 @@
               "required": ["TermAttributeValue"]
             }
           ]
+        },
+        "NumberAttributeValues": {
+          "type": "null"
         }
       },
       "required": ["NumberAttributeValues", "TermAttributeValues"]
-    },
-    "Bold": {
-      "type": "boolean"
-    },
-    "BuyItNowPrice": {
-      "type": ["integer", "null"]
-    },
-    "Buyers": {
-      "type": "array"
-    },
-    "CategoryId": {
-      "type": "integer"
-    },
-    "DetailedImageLinks": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "Format": {
-            "type": "string"
-          },
-          "Url": {
-            "type": "string"
-          }
-        },
-        "required": ["Format", "Url"]
-      }
-    },
-    "EndDate": {
-      "type": "string"
-    },
-    "FeaturedItem": {
-      "type": "boolean"
-    },
-    "Highlight": {
-      "type": "boolean"
-    },
-    "Id": {
-      "type": "integer"
-    },
-    "ImageLinks": {
-      "type": "object",
-      "properties": {
-        "string": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": ["string"]
-    },
-    "ItemAttributes": {
-      "type": "null"
-    },
-    "ItemLink": {
-      "type": "string"
-    },
-    "ItemType": {
-      "type": "string"
-    },
-    "LongDescription": {
-      "type": "string"
-    },
-    "MaxBid": {
-      "type": "integer"
-    },
-    "MaxBidder": {
-      "type": "null"
-    },
-    "NextBid": {
-      "type": "integer"
-    },
-    "OpeningBid": {
-      "type": "null"
-    },
-    "OwnReferences": {
-      "type": "null"
-    },
-    "PaymentCondition": {
-      "type": "null"
-    },
-    "PaymentOptions": {
-      "type": "null"
-    },
-    "PaymentTypeId": {
-      "type": "integer"
-    },
-    "Paypal": {
-      "type": "boolean"
-    },
-    "RemainingQuantity": {
-      "type": "integer"
-    },
-    "ReservePrice": {
-      "type": "null"
-    },
-    "ReservePriceReached": {
-      "type": "boolean"
-    },
-    "search_id": {
-      "type": "string"
-    },
-    "Seller": {
-      "type": "object",
-      "properties": {
-        "Address": {
-          "type": "null"
-        },
-        "Alias": {
-          "type": "string"
-        },
-        "City": {
-          "type": "null"
-        },
-        "CountryName": {
-          "type": "null"
-        },
-        "Email": {
-          "type": "null"
-        },
-        "FirstName": {
-          "type": "null"
-        },
-        "Id": {
-          "type": "integer"
-        },
-        "LastName": {
-          "type": "null"
-        },
-        "MobilePhoneNumber": {
-          "type": "null"
-        },
-        "PersonalNumber": {
-          "type": "null"
-        },
-        "PhoneNumber": {
-          "type": "null"
-        },
-        "TotalRating": {
-          "type": "null"
-        },
-        "TransactionId": {
-          "type": "null"
-        },
-        "ZipCode": {
-          "type": "null"
-        }
-      },
-      "required": [
-        "Address",
-        "Alias",
-        "City",
-        "CountryName",
-        "Email",
-        "FirstName",
-        "Id",
-        "LastName",
-        "MobilePhoneNumber",
-        "PersonalNumber",
-        "PhoneNumber",
-        "TotalRating",
-        "TransactionId",
-        "ZipCode"
-      ]
-    },
-    "ShippingCondition": {
-      "type": "null"
-    },
-    "ShippingOptions": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "Cost": {
-            "type": "integer"
-          },
-          "ShippingOptionId": {
-            "type": "integer"
-          },
-          "ShippingProductId": {
-            "type": "null"
-          },
-          "ShippingWeight": {
-            "type": "null"
-          }
-        },
-        "required": [
-          "Cost",
-          "ShippingOptionId",
-          "ShippingProductId",
-          "ShippingWeight"
-        ]
-      }
-    },
-    "ShortDescription": {
-      "type": "string"
-    },
-    "StartDate": {
-      "type": "string"
-    },
-    "StartQuantity": {
-      "type": "integer"
-    },
-    "Status": {
-      "type": "object",
-      "properties": {
-        "Ended": {
-          "type": "boolean"
-        },
-        "GotBidders": {
-          "type": "boolean"
-        },
-        "GotWinner": {
-          "type": "boolean"
-        }
-      },
-      "required": ["Ended", "GotBidders", "GotWinner"]
-    },
-    "Thumbnail": {
-      "type": "boolean"
-    },
-    "ThumbnailLink": {
-      "type": "string"
-    },
-    "TotalBids": {
-      "type": "integer"
-    },
-    "VAT": {
-      "type": "null"
     }
   },
   "required": [
-    "AcceptedBuyerId",
-    "AcceptsPickup",
     "AttributeValues",
-    "Bold",
+    "BidCount",
     "BuyItNowPrice",
-    "Buyers",
     "CategoryId",
-    "DetailedImageLinks",
     "EndDate",
-    "FeaturedItem",
-    "Highlight",
+    "HasBids",
     "Id",
     "ImageLinks",
-    "ItemAttributes",
-    "ItemLink",
+    "IsEnded",
     "ItemType",
-    "LongDescription",
+    "ItemUrl",
     "MaxBid",
-    "MaxBidder",
     "NextBid",
-    "OpeningBid",
-    "OwnReferences",
-    "PaymentCondition",
-    "PaymentOptions",
-    "PaymentTypeId",
-    "Paypal",
-    "RemainingQuantity",
-    "ReservePrice",
-    "ReservePriceReached",
     "search_id",
-    "Seller",
-    "ShippingCondition",
-    "ShippingOptions",
+    "SellerAlias",
+    "SellerDsrAverage",
+    "SellerId",
     "ShortDescription",
-    "StartDate",
-    "StartQuantity",
-    "Status",
-    "Thumbnail",
-    "ThumbnailLink",
-    "TotalBids",
-    "VAT"
+    "ThumbnailLink"
   ]
 }

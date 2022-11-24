@@ -156,6 +156,9 @@
     "ReservePriceReached": {
       "type": "boolean"
     },
+    "search_id": {
+      "type": "string"
+    },
     "Seller": {
       "type": "object",
       "properties": {
@@ -315,6 +318,7 @@
     "RemainingQuantity",
     "ReservePrice",
     "ReservePriceReached",
+    "search_id",
     "Seller",
     "ShippingCondition",
     "ShippingOptions",

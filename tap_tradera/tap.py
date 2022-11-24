@@ -74,17 +74,14 @@ class TapTradera(Tap):
         client = TraderaClient(
             app_id=self.config["app_id"], app_key=self.config["app_key"]
         )
-        return [
-            TraderaSearchStream(
-                tap=self,
-                client=client,
-                name=search["name"],
-                query=search["query"],
-                category_id=search["category_id"],
-                order_by=search["order_by"],
+        streams = []
+        if self.config.get("searches", []):
+            streams.append(
+                TraderaSearchStream(
+                    tap=self, client=client, searches=self.config.get("searches")
+                )
             )
-            for search in self.config.get("searches", [])
-        ]
+        return streams
 
 
 if __name__ == "__main__":

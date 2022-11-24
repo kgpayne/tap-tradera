@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from os import PathLike
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Union
+from typing import Any, Iterable, List, Optional
 
 import singer_sdk._singerlib as singer
 import zeep
@@ -19,23 +19,20 @@ SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 class TraderaSearchStream(Stream):
     """Stream class for tradera streams."""
 
-    schema_filepath = SCHEMAS_DIR / "search_items.json"
+    name = "search_items"
+    schema_filepath = SCHEMAS_DIR / "search_item.json"
 
     def __init__(
         self,
         tap: TapBaseClass,
         client: TraderaClient,
-        query: str,
-        category_id: int = 0,
-        order_by: str = "EndDateAscending",
+        searches: List[dict],
         schema: str | PathLike | dict[str, Any] | singer.Schema | None = None,
         name: str | None = None,
     ):
         super().__init__(tap=tap, schema=schema, name=name)
         self.client = client
-        self.query = query
-        self.category_id = category_id
-        self.order_by = order_by
+        self.searches = searches
 
     def get_records(self, context: Optional[dict]) -> Iterable[dict]:
         """Return a generator of record-type dictionary objects.
@@ -44,9 +41,12 @@ class TraderaSearchStream(Stream):
         stream if partitioning is required for the stream. Most implementations do not
         require partitioning and should ignore the `context` argument.
         """
-        yield from [
-            zeep.helpers.serialize_object(search_item, dict)
-            for search_item in self.client.search(
-                query=self.query, category_id=self.category_id, order_by=self.order_by
-            )
-        ]
+        for search in self.searches:
+            for raw_search_item in self.client.search(
+                query=search["query"],
+                category_id=search.get("category_id", 0),
+                order_by=search.get("order_by", "EndDateAscending"),
+            ):
+                search_item = zeep.helpers.serialize_object(raw_search_item, dict)
+                search_item["search_id"] = search["name"]
+                yield search_item

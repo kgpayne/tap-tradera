@@ -1,5 +1,6 @@
 """tradera tap class."""
 
+import csv
 from typing import List
 
 from singer_sdk import Stream, Tap
@@ -8,6 +9,7 @@ from singer_sdk import typing as th  # JSON schema typing helpers
 from tap_tradera.streams import (
     TraderaCategoriesStream,
     TraderaClient,
+    TraderaItemsStream,
     TraderaSearchStream,
 )
 
@@ -71,6 +73,9 @@ class TapTradera(Tap):
             required=False,
             description="Simple Search",
         ),
+        th.Property(
+            "items_file", th.StringType, description="File path to items list CSV."
+        ),
     ).to_dict()
 
     def discover_streams(self) -> List[Stream]:
@@ -79,12 +84,23 @@ class TapTradera(Tap):
             app_id=self.config["app_id"], app_key=self.config["app_key"]
         )
         streams = [TraderaCategoriesStream(tap=self, client=client)]
+
         if self.config.get("searches", []):
             streams.append(
                 TraderaSearchStream(
                     tap=self, client=client, searches=self.config.get("searches")
                 )
             )
+
+        if self.config.get("items_file"):
+            with open(self.config["items_file"]) as f:
+                reader = csv.reader(f)
+                item_ids = [i[0] for i in reader]
+            if item_ids:
+                streams.append(
+                    TraderaItemsStream(tap=self, client=client, item_ids=item_ids)
+                )
+
         return streams
 
 

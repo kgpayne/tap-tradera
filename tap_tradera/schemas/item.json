@@ -230,10 +230,10 @@
       "type": "integer"
     },
     "PaymentCondition": {
-      "type": "null"
+      "type": ["string", "null"]
     },
     "ShippingCondition": {
-      "type": "null"
+      "type": ["string", "null"]
     },
     "AcceptsPickup": {
       "type": "boolean"

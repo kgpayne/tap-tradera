@@ -1,6 +1,7 @@
 """tradera tap class."""
 
 import csv
+import glob
 from typing import List
 
 from singer_sdk import Stream, Tap
@@ -74,7 +75,16 @@ class TapTradera(Tap):
             description="Simple Search",
         ),
         th.Property(
-            "items_file", th.StringType, description="File path to items list CSV."
+            "items_file_path",
+            th.StringType,
+            description="Path to items list CSV.",
+            required=False,
+        ),
+        th.Property(
+            "items_file_pattern",
+            th.StringType,
+            description="File glob pattern to items list CSV.",
+            required=False,
         ),
     ).to_dict()
 
@@ -92,14 +102,25 @@ class TapTradera(Tap):
                 )
             )
 
-        if self.config.get("items_file"):
+        if "items_file_path" in self.config:
             with open(self.config["items_file"]) as f:
                 reader = csv.reader(f)
-                item_ids = [i[0] for i in reader]
-            if item_ids:
-                streams.append(
-                    TraderaItemsStream(tap=self, client=client, item_ids=item_ids)
-                )
+                item_ids = [i[0] for i in list(reader)[1:]]
+
+        if "items_file_pattern" in self.config:
+            files = glob.glob(
+                self.config["items_file_pattern"],
+            )
+            item_ids = []
+            for file in files:
+                with open(file) as f:
+                    records = csv.reader(f)
+                    item_ids.extend([i[0] for i in list(records)[1:]])
+
+        if item_ids:
+            streams.append(
+                TraderaItemsStream(tap=self, client=client, item_ids=item_ids)
+            )
 
         return streams
 

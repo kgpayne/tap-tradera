@@ -75,3 +75,27 @@ class TraderaCategoriesStream(Stream):
         """
         for category in self.client.get_categories():
             yield category
+
+
+class TraderaItemsStream(Stream):
+    """Tradera items."""
+
+    name = "items"
+    schema_filepath = SCHEMAS_DIR / "item.json"
+
+    def __init__(
+        self,
+        tap: TapBaseClass,
+        client: TraderaClient,
+        item_ids: List[str],
+        schema: str | PathLike | dict[str, Any] | singer.Schema | None = None,
+        name: str | None = None,
+    ):
+        super().__init__(tap=tap, schema=schema, name=name)
+        self.client = client
+        self.item_ids = item_ids
+
+    def get_records(self, context: dict | None) -> Iterable[dict | tuple[dict, dict]]:
+        for item_id in self.item_ids:
+            item = self.client.get_item(item_id)
+            yield item

@@ -1,0 +1,477 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "ShippingOptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ShippingOptionId": {
+            "type": "integer"
+          },
+          "Cost": {
+            "type": "integer"
+          },
+          "ShippingWeight": {
+            "type": [
+              "null",
+              "number"
+            ]
+          },
+          "ShippingProductId": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "Cost",
+          "ShippingOptionId",
+          "ShippingProductId",
+          "ShippingWeight"
+        ]
+      }
+    },
+    "PaymentOptions": {
+      "type": "object",
+      "properties": {
+        "int": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      },
+      "required": [
+        "int"
+      ]
+    },
+    "ImageLinks": {
+      "type": "object",
+      "properties": {
+        "string": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "string"
+      ]
+    },
+    "Buyers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer"
+          },
+          "Alias": {
+            "type": "string"
+          },
+          "FirstName": {
+            "type": "null"
+          },
+          "LastName": {
+            "type": "null"
+          },
+          "Email": {
+            "type": "null"
+          },
+          "TotalRating": {
+            "type": "integer"
+          },
+          "PhoneNumber": {
+            "type": "null"
+          },
+          "MobilePhoneNumber": {
+            "type": "null"
+          },
+          "Address": {
+            "type": "null"
+          },
+          "ZipCode": {
+            "type": "null"
+          },
+          "City": {
+            "type": "null"
+          },
+          "CountryName": {
+            "type": "null"
+          },
+          "PersonalNumber": {
+            "type": "null"
+          },
+          "TransactionId": {
+            "type": "null"
+          }
+        },
+        "required": [
+          "Address",
+          "Alias",
+          "City",
+          "CountryName",
+          "Email",
+          "FirstName",
+          "Id",
+          "LastName",
+          "MobilePhoneNumber",
+          "PersonalNumber",
+          "PhoneNumber",
+          "TotalRating",
+          "TransactionId",
+          "ZipCode"
+        ]
+      }
+    },
+    "Status": {
+      "type": "object",
+      "properties": {
+        "Ended": {
+          "type": "boolean"
+        },
+        "GotBidders": {
+          "type": "boolean"
+        },
+        "GotWinner": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Ended",
+        "GotBidders",
+        "GotWinner"
+      ]
+    },
+    "StartQuantity": {
+      "type": "integer"
+    },
+    "RemainingQuantity": {
+      "type": "integer"
+    },
+    "ItemType": {
+      "type": "string"
+    },
+    "DetailedImageLinks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Url": {
+            "type": "string"
+          },
+          "Format": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Format",
+          "Url"
+        ]
+      }
+    },
+    "Id": {
+      "type": "integer"
+    },
+    "VAT": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "ShortDescription": {
+      "type": "string"
+    },
+    "OwnReferences": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "string": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "string"
+          ]
+        }
+      ]
+    },
+    "AttributeValues": {
+      "type": "null"
+    },
+    "ItemAttributes": {
+      "type": "object",
+      "properties": {
+        "int": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      },
+      "required": [
+        "int"
+      ]
+    },
+    "LongDescription": {
+      "type": "string"
+    },
+    "StartDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "EndDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "CategoryId": {
+      "type": "integer"
+    },
+    "OpeningBid": {
+      "type": "integer"
+    },
+    "ReservePrice": {
+      "type": "null"
+    },
+    "ReservePriceReached": {
+      "type": "null"
+    },
+    "BuyItNowPrice": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "NextBid": {
+      "type": "integer"
+    },
+    "PaymentCondition": {
+      "type": "null"
+    },
+    "ShippingCondition": {
+      "type": "null"
+    },
+    "AcceptsPickup": {
+      "type": "boolean"
+    },
+    "TotalBids": {
+      "type": "integer"
+    },
+    "MaxBid": {
+      "type": "integer"
+    },
+    "Bold": {
+      "type": "boolean"
+    },
+    "Thumbnail": {
+      "type": "boolean"
+    },
+    "Highlight": {
+      "type": "boolean"
+    },
+    "FeaturedItem": {
+      "type": "boolean"
+    },
+    "ItemLink": {
+      "type": "string"
+    },
+    "ThumbnailLink": {
+      "type": "string"
+    },
+    "AcceptedBuyerId": {
+      "type": "integer"
+    },
+    "Paypal": {
+      "type": "boolean"
+    },
+    "PaymentTypeId": {
+      "type": "integer"
+    },
+    "Seller": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "integer"
+        },
+        "Alias": {
+          "type": "string"
+        },
+        "FirstName": {
+          "type": "null"
+        },
+        "LastName": {
+          "type": "null"
+        },
+        "Email": {
+          "type": "null"
+        },
+        "TotalRating": {
+          "type": "integer"
+        },
+        "PhoneNumber": {
+          "type": "null"
+        },
+        "MobilePhoneNumber": {
+          "type": "null"
+        },
+        "Address": {
+          "type": "null"
+        },
+        "ZipCode": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "CountryName": {
+          "type": "string"
+        },
+        "PersonalNumber": {
+          "type": "null"
+        },
+        "TransactionId": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "Address",
+        "Alias",
+        "City",
+        "CountryName",
+        "Email",
+        "FirstName",
+        "Id",
+        "LastName",
+        "MobilePhoneNumber",
+        "PersonalNumber",
+        "PhoneNumber",
+        "TotalRating",
+        "TransactionId",
+        "ZipCode"
+      ]
+    },
+    "MaxBidder": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Id": {
+              "type": "integer"
+            },
+            "Alias": {
+              "type": "string"
+            },
+            "FirstName": {
+              "type": "null"
+            },
+            "LastName": {
+              "type": "null"
+            },
+            "Email": {
+              "type": "null"
+            },
+            "TotalRating": {
+              "type": "integer"
+            },
+            "PhoneNumber": {
+              "type": "null"
+            },
+            "MobilePhoneNumber": {
+              "type": "null"
+            },
+            "Address": {
+              "type": "null"
+            },
+            "ZipCode": {
+              "type": "null"
+            },
+            "City": {
+              "type": "null"
+            },
+            "CountryName": {
+              "type": "null"
+            },
+            "PersonalNumber": {
+              "type": "null"
+            },
+            "TransactionId": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "Address",
+            "Alias",
+            "City",
+            "CountryName",
+            "Email",
+            "FirstName",
+            "Id",
+            "LastName",
+            "MobilePhoneNumber",
+            "PersonalNumber",
+            "PhoneNumber",
+            "TotalRating",
+            "TransactionId",
+            "ZipCode"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "AcceptedBuyerId",
+    "AcceptsPickup",
+    "AttributeValues",
+    "Bold",
+    "BuyItNowPrice",
+    "Buyers",
+    "CategoryId",
+    "DetailedImageLinks",
+    "EndDate",
+    "FeaturedItem",
+    "Highlight",
+    "Id",
+    "ImageLinks",
+    "ItemAttributes",
+    "ItemLink",
+    "ItemType",
+    "LongDescription",
+    "MaxBid",
+    "MaxBidder",
+    "NextBid",
+    "OpeningBid",
+    "OwnReferences",
+    "PaymentCondition",
+    "PaymentOptions",
+    "PaymentTypeId",
+    "Paypal",
+    "RemainingQuantity",
+    "ReservePrice",
+    "ReservePriceReached",
+    "Seller",
+    "ShippingCondition",
+    "ShippingOptions",
+    "ShortDescription",
+    "StartDate",
+    "StartQuantity",
+    "Status",
+    "Thumbnail",
+    "ThumbnailLink",
+    "TotalBids",
+    "VAT"
+  ]
+}

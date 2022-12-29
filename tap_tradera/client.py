@@ -82,3 +82,16 @@ class TraderaClient:
         for category in categories:
             flat_categories.extend(flatten_category(category))
         return flat_categories
+
+    def get_item(self, item_id):
+        soap_item = self.public_service.service.GetItem(
+            _soapheaders={
+                "AuthenticationHeader": {
+                    "AppId": int(self.app_id),
+                    "AppKey": self.app_key,
+                }
+            },
+            itemId=item_id,
+        )
+        item = zeep.helpers.serialize_object(soap_item, dict)
+        return item

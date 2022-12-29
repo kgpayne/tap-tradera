@@ -14,16 +14,10 @@
             "type": "integer"
           },
           "ShippingWeight": {
-            "type": [
-              "null",
-              "number"
-            ]
+            "type": ["null", "number"]
           },
           "ShippingProductId": {
-            "type": [
-              "integer",
-              "null"
-            ]
+            "type": ["integer", "null"]
           }
         },
         "required": [
@@ -44,9 +38,7 @@
           }
         }
       },
-      "required": [
-        "int"
-      ]
+      "required": ["int"]
     },
     "ImageLinks": {
       "type": "object",
@@ -58,9 +50,7 @@
           }
         }
       },
-      "required": [
-        "string"
-      ]
+      "required": ["string"]
     },
     "Buyers": {
       "type": "array",
@@ -74,40 +64,40 @@
             "type": "string"
           },
           "FirstName": {
-            "type": "null"
+            "type": ["string", "null"]
           },
           "LastName": {
-            "type": "null"
+            "type": ["string", "null"]
           },
           "Email": {
-            "type": "null"
+            "type": ["string", "null"]
           },
           "TotalRating": {
             "type": "integer"
           },
           "PhoneNumber": {
-            "type": "null"
+            "type": ["string", "null"]
           },
           "MobilePhoneNumber": {
-            "type": "null"
+            "type": ["string", "null"]
           },
           "Address": {
-            "type": "null"
+            "type": ["string", "null"]
           },
           "ZipCode": {
-            "type": "null"
+            "type": ["string", "null"]
           },
           "City": {
-            "type": "null"
+            "type": ["string", "null"]
           },
           "CountryName": {
-            "type": "null"
+            "type": ["string", "null"]
           },
           "PersonalNumber": {
-            "type": "null"
+            "type": ["string", "null"]
           },
           "TransactionId": {
-            "type": "null"
+            "type": ["string", "null"]
           }
         },
         "required": [
@@ -141,11 +131,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "Ended",
-        "GotBidders",
-        "GotWinner"
-      ]
+      "required": ["Ended", "GotBidders", "GotWinner"]
     },
     "StartQuantity": {
       "type": "integer"
@@ -168,20 +154,14 @@
             "type": "string"
           }
         },
-        "required": [
-          "Format",
-          "Url"
-        ]
+        "required": ["Format", "Url"]
       }
     },
     "Id": {
       "type": "integer"
     },
     "VAT": {
-      "type": [
-        "integer",
-        "null"
-      ]
+      "type": ["integer", "null"]
     },
     "ShortDescription": {
       "type": "string"
@@ -201,9 +181,7 @@
               }
             }
           },
-          "required": [
-            "string"
-          ]
+          "required": ["string"]
         }
       ]
     },
@@ -220,9 +198,7 @@
           }
         }
       },
-      "required": [
-        "int"
-      ]
+      "required": ["int"]
     },
     "LongDescription": {
       "type": "string"
@@ -242,16 +218,13 @@
       "type": "integer"
     },
     "ReservePrice": {
-      "type": "null"
+      "type": ["number", "null"]
     },
     "ReservePriceReached": {
-      "type": "null"
+      "type": ["boolean", "null"]
     },
     "BuyItNowPrice": {
-      "type": [
-        "integer",
-        "null"
-      ]
+      "type": ["integer", "null"]
     },
     "NextBid": {
       "type": "integer"
@@ -308,25 +281,25 @@
           "type": "string"
         },
         "FirstName": {
-          "type": "null"
+          "type": ["string", "null"]
         },
         "LastName": {
-          "type": "null"
+          "type": ["string", "null"]
         },
         "Email": {
-          "type": "null"
+          "type": ["string", "null"]
         },
         "TotalRating": {
           "type": "integer"
         },
         "PhoneNumber": {
-          "type": "null"
+          "type": ["string", "null"]
         },
         "MobilePhoneNumber": {
-          "type": "null"
+          "type": ["string", "null"]
         },
         "Address": {
-          "type": "null"
+          "type": ["string", "null"]
         },
         "ZipCode": {
           "type": "string"
@@ -338,10 +311,10 @@
           "type": "string"
         },
         "PersonalNumber": {
-          "type": "null"
+          "type": ["string", "null"]
         },
         "TransactionId": {
-          "type": "null"
+          "type": ["string", "null"]
         }
       },
       "required": [
@@ -376,40 +349,40 @@
               "type": "string"
             },
             "FirstName": {
-              "type": "null"
+              "type": ["string", "null"]
             },
             "LastName": {
-              "type": "null"
+              "type": ["string", "null"]
             },
             "Email": {
-              "type": "null"
+              "type": ["string", "null"]
             },
             "TotalRating": {
               "type": "integer"
             },
             "PhoneNumber": {
-              "type": "null"
+              "type": ["string", "null"]
             },
             "MobilePhoneNumber": {
-              "type": "null"
+              "type": ["string", "null"]
             },
             "Address": {
-              "type": "null"
+              "type": ["string", "null"]
             },
             "ZipCode": {
-              "type": "null"
+              "type": ["string", "null"]
             },
             "City": {
-              "type": "null"
+              "type": ["string", "null"]
             },
             "CountryName": {
-              "type": "null"
+              "type": ["string", "null"]
             },
             "PersonalNumber": {
-              "type": "null"
+              "type": ["string", "null"]
             },
             "TransactionId": {
-              "type": "null"
+              "type": ["string", "null"]
             }
           },
           "required": [

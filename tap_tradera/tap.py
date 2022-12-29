@@ -119,7 +119,9 @@ class TapTradera(Tap):
 
         if item_ids:
             streams.append(
-                TraderaItemsStream(tap=self, client=client, item_ids=item_ids)
+                TraderaItemsStream(
+                    tap=self, client=client, item_ids=list(set(item_ids))
+                )
             )
 
         return streams

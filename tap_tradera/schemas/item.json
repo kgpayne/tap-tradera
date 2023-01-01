@@ -119,19 +119,26 @@
       }
     },
     "Status": {
-      "type": "object",
-      "properties": {
-        "Ended": {
-          "type": "boolean"
+      "anyOf": [
+        {
+          "type": "null"
         },
-        "GotBidders": {
-          "type": "boolean"
-        },
-        "GotWinner": {
-          "type": "boolean"
+        {
+          "type": "object",
+          "properties": {
+            "Ended": {
+              "type": "boolean"
+            },
+            "GotBidders": {
+              "type": "boolean"
+            },
+            "GotWinner": {
+              "type": "boolean"
+            }
+          },
+          "required": ["Ended", "GotBidders", "GotWinner"]
         }
-      },
-      "required": ["Ended", "GotBidders", "GotWinner"]
+      ]
     },
     "StartQuantity": {
       "type": "integer"

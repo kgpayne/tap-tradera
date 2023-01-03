@@ -102,6 +102,7 @@ class TapTradera(Tap):
                 )
             )
 
+        item_ids = []
         if "items_file_path" in self.config:
             with open(self.config["items_file"]) as f:
                 reader = csv.reader(f)
@@ -111,7 +112,6 @@ class TapTradera(Tap):
             files = glob.glob(
                 self.config["items_file_pattern"],
             )
-            item_ids = []
             for file in files:
                 with open(file) as f:
                     records = csv.reader(f)

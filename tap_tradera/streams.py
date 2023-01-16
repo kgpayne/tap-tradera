@@ -20,6 +20,8 @@ class TraderaSearchStream(Stream):
 
     name = "search_items"
     schema_filepath = SCHEMAS_DIR / "search_item.json"
+    primary_keys = ["search_id", "Id"]
+    replication_key = None
 
     def __init__(
         self,
@@ -55,6 +57,8 @@ class TraderaCategoriesStream(Stream):
 
     name = "categories"
     schema_filepath = SCHEMAS_DIR / "category.json"
+    primary_keys = ["Id"]
+    replication_key = None
 
     def __init__(
         self,
@@ -82,6 +86,8 @@ class TraderaItemsStream(Stream):
 
     name = "items"
     schema_filepath = SCHEMAS_DIR / "item.json"
+    primary_keys = ["Id"]
+    replication_key = None
 
     def __init__(
         self,
